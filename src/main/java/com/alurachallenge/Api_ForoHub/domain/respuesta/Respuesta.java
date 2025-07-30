@@ -3,6 +3,7 @@ package com.alurachallenge.Api_ForoHub.domain.respuesta;
 import com.alurachallenge.Api_ForoHub.domain.topico.Topico;
 import com.alurachallenge.Api_ForoHub.domain.usuario.Usuario;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jdk.jfr.Threshold;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -31,21 +32,21 @@ public class Respuesta {
     private LocalDateTime fechaCreacion;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id")
-    private Usuario usuario;
+    private Usuario autor;
     private String solucion;
     private Boolean state;
 
-    public Respuesta(Topico topico, String mensaje, Usuario usuario, String solucion) {
+    public Respuesta(@NotBlank String mensaje, String solucion, Usuario usuario, Topico topico) {
         this.id = null;
         this.mensaje = mensaje;
         this.topico = topico;
         this.fechaCreacion = LocalDateTime.now();
-        this.usuario = usuario;
+        this.autor = usuario;
         this.solucion = solucion;
         this.state = true;
     }
 
-    public void actuaizarInformacion(DatosActualizarRespuesta datos){
+    public void actualizarInformaciones(DatosActualizarRespuesta datos){
         if (datos.mensaje() != null){
             this.mensaje = datos.mensaje();
         }
@@ -57,4 +58,5 @@ public class Respuesta {
     public void eliminar() {
         this.state = false;
     }
+
 }

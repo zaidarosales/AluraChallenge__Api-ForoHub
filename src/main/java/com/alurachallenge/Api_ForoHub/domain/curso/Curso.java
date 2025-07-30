@@ -26,6 +26,7 @@ public class Curso {
         this.categoriaCurso = datosCurso.categoriaCurso();
     }
 
+
     public String getNombreCurso() {
         return nombreCurso;
     }

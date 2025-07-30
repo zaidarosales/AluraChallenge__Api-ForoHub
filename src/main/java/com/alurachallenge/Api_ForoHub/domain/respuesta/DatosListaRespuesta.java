@@ -1,24 +1,20 @@
-package richard.lipa.Api_ForoHub.domain.respuesta;
-
-import com.alurachallenge.Api_ForoHub.domain.respuesta.Respuesta;
+package com.alurachallenge.Api_ForoHub.domain.respuesta;
 
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-public record DatosDetalleRespuesta(
+public record DatosListaRespuesta(
         Long id,
-        String rspuestaMensage,
+        String respuestaMensaje,
         String solucion,
         String topicoTitulo,
         String topicoMensaje,
         String topicoNameCurso,
-        String topicoFecha,
         String autorNombre,
-        String autorEmail,
         String fechaRespuesta
 ) {
 
-    public DatosDetalleRespuesta(Respuesta respuesta) {
+    public DatosListaRespuesta(Respuesta respuesta) {
         this(
                 respuesta.getId(),
                 respuesta.getMensaje(),
@@ -26,11 +22,7 @@ public record DatosDetalleRespuesta(
                 respuesta.getTopico().getTitulo(),
                 respuesta.getTopico().getMensaje(),
                 respuesta.getTopico().getCurso().getNombreCurso(),
-                respuesta.getTopico().getFechaCreacion().format(
-                        DateTimeFormatter.ofPattern( "d 'de' MMMM 'del' yyyy 'a las' h:mm a", new Locale("es", "ES"))
-                ),
                 respuesta.getAutor().getNombre(),
-                respuesta.getAutor().getEmail(),
                 respuesta.getFechaCreacion().format(
                         DateTimeFormatter.ofPattern( "d 'de' MMMM 'del' yyyy 'a las' h:mm a", new Locale("es", "ES"))
                 )
